@@ -3,7 +3,9 @@ import Editor from '@monaco-editor/react';
 import axios from 'axios';
 import { io } from 'socket.io-client';
 
-const socket = io('http://192.168.1.6:5000'); 
+import { serverURL } from "../util/server";
+
+const socket = io(serverURL); 
 
 const CodeEditor = () => {
     const editorRef = useRef(null);
@@ -34,7 +36,7 @@ const CodeEditor = () => {
     };
 
     const saveCode = () => {
-        axios.post('http://192.168.1.6:5000/save', { content: code }) // Update URL to use your local IP
+        axios.post(`${serverURL}/save`, { content: code }) // Update URL to use your local IP
             .then(response => {
                 alert(response.data);
             }).catch(error => {
