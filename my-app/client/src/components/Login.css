@@ -74,6 +74,30 @@ img{
     font-size: 19px;
 }
 
+.cr-account{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin-top: 20px;
+}
+
+.forgot-password{
+    padding-left: 12vw;
+    margin-top: 10px;
+    color: #4c00b4;
+    font-size: 21px;
+    cursor: pointer;
+}
+
+.Create-account{
+    font-size: 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: tomato;
+    color: white;
+    padding: 0 20px;
+}
+
 .submit-container{
     display: flex;
     gap: 30px;

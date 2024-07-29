@@ -1,16 +1,21 @@
-import React from 'react'
-import CodeEditor from './components/CodeEditor'
-import { SignUp } from './components/SignUp'
-import './App.css'
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { SignUp } from './components/SignUp';
+import { Login } from './components/Login';
+import './App.css';
 
 const App = () => {
   return (
-    <div className='app'>
-      <h1>CodeEditor</h1>
-      <SignUp />
-      {/* <CodeEditor /> */}
-    </div>
-  )
-}
+    <Router>
+      <div className='app'>
+        <h1>CodeEditor</h1>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+};
 
-export default App
+export default App;
