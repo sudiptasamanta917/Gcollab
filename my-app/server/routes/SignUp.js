@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db');
+const initializeDatabase = require('../db');
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const { username, email, password } = req.body;
 
   // Validate request body
@@ -12,14 +12,14 @@ router.post('/', (req, res) => {
 
   const sql = 'INSERT INTO users (user_name, email, password) VALUES (?, ?, ?)';
 
-  db.query(sql, [username, email, password], (err, result) => {
-    if (err) {
-      console.error('Error inserting data:', err);
-      return res.status(500).json({ message: 'Database error' });
-    }
+  try {
+    const db = await initializeDatabase();
+    await db.execute(sql, [username, email, password]);
     res.json({ message: 'User registered successfully' });
-  });
+  } catch (err) {
+    console.error('Error inserting data:', err);
+    res.status(500).json({ message: 'Database error' });
+  }
 });
 
 module.exports = router;
-

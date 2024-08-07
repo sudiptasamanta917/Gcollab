@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SignUp.css'
 
@@ -6,17 +7,23 @@ export const SignUp = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate(); // Updated to useNavigate
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
           const response = await axios.post('http://localhost:5000/api/signup', { username, email, password });
           console.log('Signup successful:', response.data);
+          navigate('/');
           // Handle successful signup (e.g., redirect, show success message)
         } catch (error) {
           console.error('Signup failed:', error.response.data);
         }
     };
+
+    const handleLoginAccount = () => {
+        navigate('/'); // Updated to use navigate
+      };
 
     return (
         <div>
@@ -54,6 +61,7 @@ export const SignUp = () => {
                     </div>
                     <div className='submit-container'>
                         <button type='submit' className='submit'>Sign Up</button>
+                        <button type="button" className="submit" onClick={handleLoginAccount}>Login</button>
                     </div>
                 </form>
             </div>

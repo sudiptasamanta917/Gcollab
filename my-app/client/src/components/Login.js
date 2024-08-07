@@ -12,6 +12,11 @@ export const Login = () => {
     try {
       const response = await axios.post('http://localhost:5000/api/login', { email, password });
       console.log('Login successful:', response.data);
+      const userId = response.data.userId;
+      // Store the user ID in local storage
+      localStorage.setItem('userId', userId);
+      // Redirect to the user's groups page
+      navigate('/users/:userId/groups');
       // Handle successful login (e.g., redirect, store token)
     } catch (error) {
       console.error('Login failed:', error.response.data);
